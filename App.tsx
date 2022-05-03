@@ -6,19 +6,22 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { Inavigation } from './types'
 import { ThemeProvider } from 'styled-components'
 import { dark, light } from './theme'
+import treinosVeri from './utils/treinosVeri'
 import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer } from '@react-navigation/native'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
 import Exercises from './pages/Exercises'
+import AddExercises from './pages/AddExercises'
 import AppLoading from 'expo-app-loading'
 import updateApp from './utils/updateApp'
 
 function App() {
   const [pronto, setPronto] = useState(false)
   const [theme, setTheme] = useState<'light' | 'dark' | null | undefined>(Appearance.getColorScheme())
-  const [name, setName] = useState('')
+  const [name, setName] = useState(null)
+  const [treinos, setTreinos] = useState([])
   const { Navigator, Screen } = createStackNavigator<Inavigation>()
   
   async function themeVeri() {
@@ -44,12 +47,12 @@ function App() {
   }
 
   async function nameVeri() {
-    try {
-      if (await AsyncStorage.getItem('name') !== null) {
-        setName(await AsyncStorage.getItem('name'))
-      }
-    } catch {
+    const nameOrigin = await AsyncStorage.getItem('name')
 
+    if (nameOrigin) {
+      setName(nameOrigin)
+    } else {
+      setName(null)
     }
   }
 
@@ -57,6 +60,7 @@ function App() {
     updateApp().then(async () => {
       await themeVeri()
       await nameVeri()
+      await treinosVeri(treinos, setTreinos)
       
       setPronto(true)
     })
@@ -73,6 +77,10 @@ function App() {
   useEffect(() => {
     nameVeri().then()
   }, [name])
+
+  useEffect(() => {
+    treinosVeri(treinos, setTreinos).then()
+  }, [treinos])
   
   if (!pronto) {
     return <AppLoading/>
@@ -120,6 +128,7 @@ function App() {
               />}
             </Screen>
             <Screen name="Exercises" component={Exercises}/>
+            <Screen name="AddExercises" component={AddExercises}/>
           </Navigator>
         </NavigationContainer>
       </ThemeProvider>

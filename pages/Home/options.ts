@@ -7,7 +7,9 @@ function options(navigation: NativeStackScreenProps<Inavigation, 'Home'>['naviga
     {
       title: 'Treinos',
       icon: 'fitness-center',
-      onClick: () => navigation.navigate('Exercises')
+      onClick: () => navigation.navigate('Exercises', {
+        reload: false
+      })
     }
   ]
 }

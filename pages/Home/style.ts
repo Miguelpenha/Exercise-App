@@ -18,7 +18,7 @@ export const Settings = styled(MaterialIcons)`
 `
 
 export const ContainerMessage = styled.View`
-    margin-top: 8%;
+    margin-top: 14%;
     margin-left: 10%;
     padding-left: 2.5%;
     margin-bottom: 10%;
@@ -40,4 +40,5 @@ export const Message = styled.Text`
 
 export const Options = styled.FlatList`
     flex-grow: 0;
+    margin-top: 8%;
 `

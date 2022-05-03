@@ -52,15 +52,11 @@ const Settings: FC<Iprops> = ({ navigation, theme, setTheme, veriGeral }) => {
                     <Switch trackColor={{false: darkTheme.secondary, true: lightTheme.secondary}} thumbColor={dark ? darkTheme.secondary : lightTheme.secondary} value={dark} onChange={() => dark ? setDark(false) : setDark(true)}/>
                 </ContainerSwitch>
                 <Button onPress={async () => {
-                    AsyncStorage.removeItem('theme', () => {
-                        AsyncStorage.removeItem('name', () => {
-                            veriGeral().then(() => {
-                                navigation.reset({
-                                    index: 0,
-                                    routes: [{ name: 'Login' }]
-                                })
-                            })
-                        })
+                    await AsyncStorage.multiRemove(['theme', 'name', 'treinos'])
+                    await veriGeral()
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: 'Login' }]
                     })
                 }}>
                     <IconButton name="delete" size={32}/>

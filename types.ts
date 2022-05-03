@@ -12,5 +12,13 @@ export type Inavigation = {
   Home: undefined
   Login: undefined
   Settings: undefined
-  Exercises: undefined
+  Exercises: {
+    reload: boolean
+  }
+  AddExercises: undefined
+}
+
+export interface Itreino {
+  name: string
+  séries: number
 }
