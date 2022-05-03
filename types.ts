@@ -19,6 +19,7 @@ export type Inavigation = {
 }
 
 export interface Itreino {
+  id: string
   name: string
   séries: number
 }

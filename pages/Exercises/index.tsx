@@ -29,8 +29,8 @@ export default function Exercises({ navigation, route }: Iprops) {
           <ContainerIconAdd onPress={() => navigation.navigate('AddExercises')}>
             <IconAdd name="add" size={50}/>
           </ContainerIconAdd>
-          {treinos.map((treino, index) => (
-            <View key={index}>
+          {treinos.map(treino => (
+            <View key={treino.id}>
               <Text>{treino.name}</Text>
             </View>
           ))}
