@@ -20,9 +20,13 @@ export default function AddExercises({ navigation }: Iprops) {
   const [séries, setSéries] = useState('')
 
   useEffect(() => {
-    AsyncStorage.getItem('treinos', (err, treinosOrigen) => (
+    async function getTreinos() {
+      const treinosOrigen = await AsyncStorage.getItem('treinos')
+
       setTreinos(JSON.parse(treinosOrigen))
-    ))
+    }
+
+    getTreinos().then()
   }, [])
 
   if (treinos) {
@@ -57,7 +61,7 @@ export default function AddExercises({ navigation }: Iprops) {
                   placeholderTextColor={theme.color}
                 />
               </Campo>
-              <Button onPress={() => submit(navigation, treinos, name, Number(séries))}>
+              <Button onPress={async () => await submit(navigation, treinos, name, Number(séries))}>
                 <TextButton>Adicionar</TextButton>
               </Button>
             </Form>
