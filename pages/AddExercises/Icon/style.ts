@@ -7,7 +7,6 @@ export const Container = styled.TouchableOpacity`
     align-self: center;
     align-items: center;
     justify-content: center;
-    width: ${RFPercentage(10)}px;
     border-radius: ${RFPercentage(3)}px;
     background-color: ${props => props.theme.primary};
 `

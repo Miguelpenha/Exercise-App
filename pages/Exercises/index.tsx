@@ -32,7 +32,7 @@ export default function Exercises({ navigation, route }: Iprops) {
             <IconAdd name="add" size={50}/>
           </ContainerIconAdd>
           {treinos.map(exercise => (
-            <Exercise exercise={exercise} onPress={() => navigation.navigate('Exercise', {
+            <Exercise key={exercise.id} exercise={exercise} onPress={() => navigation.navigate('Exercise', {
               exercise
             })} onDelete={() => {
               treinosVeri(treinos, setTreinos).then()

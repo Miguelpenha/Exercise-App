@@ -11,7 +11,7 @@ interface Iprops extends TouchableOpacityProps {
 
 const Exercise: FC<Iprops> = ({ exercise, onDelete, ...props }) => {
     return (
-        <Container key={exercise.id} {...props}>
+        <Container {...props}>
             <Icon name={exercise.icon} size={38}/>
             <Name>{exercise.name}</Name>
             <Séries>{exercise.séries}</Séries>

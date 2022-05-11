@@ -38,7 +38,13 @@ export default function AddExercises({ navigation }: Iprops) {
 
   const icons: (keyof typeof MaterialIcons.glyphMap)[] = [
     'fitness-center',
-    'sports-football'
+    'sports-mma',
+    'sports-soccer',
+    'pool',
+    'sports-football',
+    'pedal-bike',
+    'sports-tennis',
+    'sports-volleyball'
   ]
 
   if (treinos) {
@@ -49,7 +55,10 @@ export default function AddExercises({ navigation }: Iprops) {
             <HeaderBack onClick={() => navigation.goBack()}/>
             <Title>Adicionar Treino</Title>
             <Form>
-              <IconSelect name={icon} onPress={() => modalRef.current.open()}/>
+              <IconSelect name={icon} onPress={() => {
+                Keyboard.dismiss()
+                modalRef.current.open()
+              }}/>
               <Campo>
                 <Label>Nome do treino</Label>
                 <Input
@@ -74,30 +83,35 @@ export default function AddExercises({ navigation }: Iprops) {
                   placeholderTextColor={theme.color}
                 />
               </Campo>
-              <Button onPress={async () => await submit(navigation, treinos, name, Number(séries), icon)}>
+              <Button onPress={async () => {
+                Keyboard.dismiss()
+                await submit(navigation, treinos, name, Number(séries), icon)
+              }}>
                 <TextButton>Adicionar</TextButton>
               </Button>
             </Form>
           </KeyboardAvoidingView>
           <Modalize
             ref={modalRef}
-            modalHeight={RFPercentage(75)}
-            modalStyle={{backgroundColor: theme.backgroundColor, alignItems: 'center'}}
+            modalHeight={RFPercentage(85)}
+            modalStyle={{backgroundColor: theme.secondary, alignItems: 'center', justifyContent: 'center', paddingTop: '5%'}}
+            childrenStyle={{width: '100%', alignItems: 'center'}}
             flatListProps={{
               data: icons,
               keyExtractor: (item, index) => String(index),
               renderItem: ({ item }: ListRenderItemInfo<keyof typeof MaterialIcons.glyphMap>) => (
                 <Icon
                   name={item}
-                  style={{marginTop: 20}}
+                  style={{marginTop: 20, marginBottom: 20, marginRight: 30, marginLeft: 30}}
                   onPress={() => {
                     modalRef.current.close()
                     setIcon(item)
                   }}
                 />
               ),
+              numColumns: 2,
               style: {
-                width: RFPercentage(60)
+                flexBasis: 0
               }
             }}
             >
