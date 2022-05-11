@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import { RFPercentage } from 'react-native-responsive-fontsize'
+import Icon from './Icon'
 
 export const Title = styled.Text`
     font-weight: bold;
@@ -16,6 +17,11 @@ export const Form = styled.View`
     align-self: center;
     border-radius: ${RFPercentage(1)}px;
     background-color: ${props => props.theme.secondary};
+`
+
+export const IconSelect = styled(Icon)`
+    margin-top: 2%;
+    margin-bottom: 5%;
 `
 
 export const Campo = styled.View`

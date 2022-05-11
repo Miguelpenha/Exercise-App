@@ -15,11 +15,15 @@ export type Inavigation = {
   Exercises: {
     reload: boolean
   }
+  Exercise: {
+    exercise: Itreino
+  }
   AddExercises: undefined
 }
 
 export interface Itreino {
   id: string
   name: string
+  icon: string
   séries: number
 }

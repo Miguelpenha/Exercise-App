@@ -14,6 +14,7 @@ import Home from './pages/Home'
 import Settings from './pages/Settings'
 import Exercises from './pages/Exercises'
 import AddExercises from './pages/AddExercises'
+import Exercise from './pages/Exercise'
 import AppLoading from 'expo-app-loading'
 import updateApp from './utils/updateApp'
 
@@ -129,6 +130,7 @@ function App() {
             </Screen>
             <Screen name="Exercises" component={Exercises}/>
             <Screen name="AddExercises" component={AddExercises}/>
+            <Screen name="Exercise" component={Exercise}/>
           </Navigator>
         </NavigationContainer>
       </ThemeProvider>

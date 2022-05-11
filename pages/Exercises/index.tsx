@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Inavigation, Itreino } from '../../types'
-import { useTheme } from 'styled-components'
 import treinosVeri from '../../utils/treinosVeri'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import ContainerPd from '../../components/ContainerPd'
 import HeaderBack from '../../components/HeaderBack'
 import { Title, ContainerIconAdd, IconAdd } from './style'
-import { View, Text } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import Exercise from '../../components/Exercise'
 
 interface Iprops {
   navigation: NativeStackScreenProps<Inavigation, 'Exercises'>['navigation']
@@ -15,7 +14,6 @@ interface Iprops {
 }
 
 export default function Exercises({ navigation, route }: Iprops) {
-  const theme = useTheme()
   const { reload } = route.params
   const [treinos, setTreinos] = useState<Itreino[]>([])
 
@@ -33,10 +31,12 @@ export default function Exercises({ navigation, route }: Iprops) {
           <ContainerIconAdd onPress={() => navigation.navigate('AddExercises')}>
             <IconAdd name="add" size={50}/>
           </ContainerIconAdd>
-          {treinos.map(treino => (
-            <View key={treino.id}>
-              <Text style={{color: theme.secondaryColor}}>{treino.name}</Text>
-            </View>
+          {treinos.map(exercise => (
+            <Exercise exercise={exercise} onPress={() => navigation.navigate('Exercise', {
+              exercise
+            })} onDelete={() => {
+              treinosVeri(treinos, setTreinos).then()
+            }}/>
           ))}
       </ContainerPd>
     )
