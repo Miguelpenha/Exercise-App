@@ -3,6 +3,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Inavigation } from '../../types'
 import ContainerPd from '../../components/ContainerPd'
 import HeaderBack from '../../components/HeaderBack'
+import limitText from '../../utils/limitText'
 import { Name } from './style'
 
 interface Iprops {
@@ -15,7 +16,7 @@ const Exercise: FC<Iprops> = ({ route, navigation }) => {
 
     return (
         <ContainerPd>
-            <HeaderBack onClick={() => navigation.goBack()} title={exercise.name}/>
+            <HeaderBack onClick={() => navigation.goBack()} title={limitText(exercise.name, 25)}/>
             <Name>{exercise.name}</Name>
         </ContainerPd>
     )

@@ -1,8 +1,6 @@
 import styled from 'styled-components/native'
 import ButtonBackNotStyled from '../ButtonBack'
 import { RFPercentage } from 'react-native-responsive-fontsize'
-import convertPxToPercentage from '../../utils/convertPxToPercentage'
-convertPxToPercentage(20)
 
 export const Container = styled.View`
     padding-top: 14%;

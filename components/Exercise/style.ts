@@ -30,34 +30,9 @@ export const Name = styled.Text`
     color: ${props => props.theme.color};
 `
 
-export const Options = styled.View`
-    margin-left: auto;
-    flex-direction: row;
-    justify-content: space-evenly;
-`
-
-export const ContainerIconEdit = styled.TouchableOpacity`
-    padding: 2%;
-    align-self: center;
-    border-radius: ${RFPercentage(3)}px;
-`
-
-export const IconEdit = styled(MaterialIcons)`
-    color: ${props => props.theme.color};
-`
-
-export const ContainerIconDelete = styled.TouchableOpacity`
-    padding: 2%;
-    align-self: center;
-    border-radius: ${RFPercentage(3)}px;
-`
-
-export const IconDelete = styled(MaterialIcons)`
-    color: ${props => props.theme.color};
-`
-
 export const Row2 = styled.View`
-    margin-bottom: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     flex-direction: row;
 `
 
@@ -109,4 +84,30 @@ export const IconSéries = styled(MaterialIcons)`
     margin-left: 4%;
     align-self: center;
     color: ${props => props.theme.primary};
+`
+
+export const Options = styled.View`
+    margin-left: auto;
+    flex-direction: row;
+    justify-content: space-evenly;
+`
+
+export const ContainerIconEdit = styled.TouchableOpacity`
+    padding: 2%;
+    align-self: center;
+    border-radius: ${RFPercentage(3)}px;
+`
+
+export const IconEdit = styled(MaterialIcons)`
+    color: ${props => props.theme.color};
+`
+
+export const ContainerIconDelete = styled.TouchableOpacity`
+    padding: 2%;
+    align-self: center;
+    border-radius: ${RFPercentage(3)}px;
+`
+
+export const IconDelete = styled(MaterialIcons)`
+    color: ${props => props.theme.color};
 `
