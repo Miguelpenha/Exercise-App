@@ -31,7 +31,7 @@ export const Campo = styled.View`
 export const Label = styled.Text`
     margin-bottom: 3%;
     font-weight: bold;
-    font-size: ${RFPercentage(3)}px;
+    font-size: ${RFPercentage(2.8)}px;
     color: ${props => props.theme.color};
 `
 

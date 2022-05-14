@@ -19,6 +19,9 @@ export type Inavigation = {
     exercise: Itreino
   }
   AddExercises: undefined
+  EditExercises: {
+    exercise: Itreino
+  }
 }
 
 export interface Itreino {
@@ -26,4 +29,5 @@ export interface Itreino {
   name: string
   icon: string
   séries: number
+  quantity: number
 }

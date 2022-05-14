@@ -15,7 +15,7 @@ const Exercise: FC<Iprops> = ({ route, navigation }) => {
 
     return (
         <ContainerPd>
-            <HeaderBack onClick={() => navigation.goBack()}/>
+            <HeaderBack onClick={() => navigation.goBack()} title={exercise.name}/>
             <Name>{exercise.name}</Name>
         </ContainerPd>
     )

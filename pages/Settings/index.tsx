@@ -45,7 +45,7 @@ const Settings: FC<Iprops> = ({ navigation, theme, setTheme, veriGeral }) => {
     
     return (
         <ContainerPd>
-            <HeaderBack onClick={() => navigation.goBack()}/>
+            <HeaderBack onClick={() => navigation.goBack()} title="Configurações"/>
             <ScrollView>
                 <ContainerSwitch>
                     <TextSwitch>Tema escuro</TextSwitch>

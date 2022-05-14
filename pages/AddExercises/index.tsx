@@ -23,6 +23,7 @@ export default function AddExercises({ navigation }: Iprops) {
   const theme = useTheme()
   const [name, setName] = useState('')
   const [séries, setSéries] = useState('')
+  const [quantity, setQuantity] = useState('')
   const [icon, setIcon] = useState<keyof typeof MaterialIcons.glyphMap>('fitness-center')
   const modalRef = useRef<Modalize>(null)
 
@@ -52,7 +53,7 @@ export default function AddExercises({ navigation }: Iprops) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ContainerPd>
           <KeyboardAvoidingView behavior="position" enabled>
-            <HeaderBack onClick={() => navigation.goBack()}/>
+            <HeaderBack onClick={() => navigation.goBack()} title="Adicionar treino"/>
             <Title>Adicionar Treino</Title>
             <Form>
               <IconSelect name={icon} onPress={() => {
@@ -71,7 +72,20 @@ export default function AddExercises({ navigation }: Iprops) {
                 />
               </Campo>
               <Campo>
-                <Label>Quantidade de séries</Label>
+                <Label>Quantidade de exercícios</Label>
+                <Input
+                  maxLength={4}
+                  value={quantity}
+                  keyboardType="number-pad"
+                  onChangeText={setQuantity}
+                  placeholder="Quantidade..."
+                  autoCompleteType="cc-number"
+                  selectionColor={theme.primary}
+                  placeholderTextColor={theme.color}
+                />
+              </Campo>
+              <Campo>
+                <Label>Quantidade de séries (repetições)</Label>
                 <Input
                   maxLength={4}
                   value={séries}
@@ -85,7 +99,7 @@ export default function AddExercises({ navigation }: Iprops) {
               </Campo>
               <Button onPress={async () => {
                 Keyboard.dismiss()
-                await submit(navigation, treinos, name, Number(séries), icon)
+                await submit(navigation, treinos, name, Number(séries), Number(quantity), icon)
               }}>
                 <TextButton>Adicionar</TextButton>
               </Button>
