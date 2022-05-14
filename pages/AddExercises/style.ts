@@ -9,11 +9,11 @@ export const Title = styled.Text`
     color: ${props => props.theme.primary};
 `
 
-export const Form = styled.View`
+export const Form = styled.ScrollView`
     width: 95%;
     padding: 5%;
+    height: 76%;
     margin-top: 10%;
-    margin-bottom: 5%;
     align-self: center;
     border-radius: ${RFPercentage(1)}px;
     background-color: ${props => props.theme.secondary};

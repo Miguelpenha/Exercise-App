@@ -13,6 +13,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import submit from './submit'
 import { Modalize } from 'react-native-modalize'
 import { RFPercentage } from 'react-native-responsive-fontsize'
+import { ScrollView } from 'react-native'
 
 interface Iprops {
   navigation: NativeStackScreenProps<Inavigation, 'AddExercises'>['navigation']
@@ -52,9 +53,9 @@ export default function AddExercises({ navigation }: Iprops) {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ContainerPd>
-          <KeyboardAvoidingView behavior="position" enabled>
-            <HeaderBack onClick={() => navigation.goBack()} title="Adicionar treino"/>
-            <Title>Adicionar Treino</Title>
+          <HeaderBack onClick={() => navigation.goBack()} title="Adicionar treino"/>
+          <Title>Adicionar Treino</Title>
+          <KeyboardAvoidingView behavior="height" enabled>
             <Form>
               <IconSelect name={icon} onPress={() => {
                 Keyboard.dismiss()
