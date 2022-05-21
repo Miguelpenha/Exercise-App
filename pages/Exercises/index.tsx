@@ -69,7 +69,9 @@ function Exercises() {
             )}
           />
           <Modalize ref={modalInfoRef} modalHeight={RFPercentage(80)} modalStyle={{backgroundColor: theme.secondary}}>
-            <ModalInfoRef exercise={selectExercise}/>
+            <ModalInfoRef modal={modalInfoRef} exercise={selectExercise} onNext={exercise => navigation.navigate('Exercise', {
+              exercise
+            })}/>
           </Modalize>
       </ContainerPd>
     )
