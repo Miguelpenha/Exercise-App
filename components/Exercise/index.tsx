@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Inavigation } from '../../types'
+import { NavigationProp } from '@react-navigation/native'
 import { Itreino } from '../../types'
 import { TouchableOpacityProps } from 'react-native'
 import { Container, Row1, Icon, Name, Row2, ContainerDate, ContainerDateCenter, ContainerQuantity, Quantity, IconQuantity, ContainerSéries, Séries, IconSéries, Options, ContainerIconEdit, IconEdit, ContainerIconDelete, IconDelete } from './style'
@@ -10,7 +9,7 @@ import deleteExercise from './deleteExercise'
 interface Iprops extends TouchableOpacityProps {
     exercise: Itreino
     onDelete: Function
-    navigation: NativeStackScreenProps<Inavigation>['navigation']
+    navigation: NavigationProp<ReactNavigation.RootParamList, keyof ReactNavigation.RootParamList>
     openModalInfoRef: Function
 }
 

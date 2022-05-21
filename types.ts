@@ -8,7 +8,7 @@ export interface Itheme {
   backgroundColor: string
 }
 
-export type Inavigation = {
+export interface Inavigation {
   Home: undefined
   Login: undefined
   Settings: undefined

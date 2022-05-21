@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useRoute, useNavigation } from '@react-navigation/native'
 import { Inavigation, Itreino } from '../../types'
 import treinosVeri from '../../utils/treinosVeri'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -13,14 +13,11 @@ import { Modalize } from 'react-native-modalize'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import ModalInfoRef from './ModalInfoRef'
 
-interface Iprops {
-  navigation: NativeStackScreenProps<Inavigation, 'Exercises'>['navigation']
-  route: NativeStackScreenProps<Inavigation, 'Exercises'>['route']
-}
-
-export default function Exercises({ navigation, route }: Iprops) {
+function Exercises() {
+  const route = useRoute()
+  const navigation = useNavigation()
   const modalInfoRef = useRef<Modalize>(null)
-  const { reload } = route.params
+  const { reload } = route.params as Inavigation['Exercises']
   const theme = useTheme()
   const [selectExercise, setSelectExercise] = useState(null)
   const [refreshing, setRefreshing] = useState(false)
@@ -44,7 +41,6 @@ export default function Exercises({ navigation, route }: Iprops) {
     return (
       <ContainerPd>
           <HeaderBack onClick={() => navigation.goBack()} title="Treinos"/>
-          
           <FlatList
             data={treinos}
             ListHeaderComponent={() => <>
@@ -81,3 +77,5 @@ export default function Exercises({ navigation, route }: Iprops) {
     return null
   }
 }
+
+export default Exercises

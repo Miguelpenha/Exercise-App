@@ -1,8 +1,7 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Inavigation } from '../../types'
+import { NavigationProp } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-function submit(name: string, navigation: NativeStackScreenProps<Inavigation, 'Login'>['navigation']) {
+function submit(name: string, navigation: NavigationProp<ReactNavigation.RootParamList, keyof ReactNavigation.RootParamList>) {
     if (name) {
         if (name.length >= 3 && name.length <= 25) {
             AsyncStorage.setItem('name', name, () => 

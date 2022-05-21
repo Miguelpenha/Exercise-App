@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Inavigation } from '../../types'
+import { useNavigation } from '@react-navigation/native'
 import { useTheme } from 'styled-components'
 import ContainerPd from '../../components/ContainerPd'
 import { TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native'
 import { Title, Form, Campo, Label, Input, Button, TextButton } from './style'
 import submit from './submit'
 
-interface Iprops {
-  navigation: NativeStackScreenProps<Inavigation, 'Login'>['navigation']
-}
-
-export default function Home({ navigation }: Iprops) {
+function Home() {
   const [name, setName] = useState('')
   const theme = useTheme()
+  const navigation = useNavigation()
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -43,3 +39,5 @@ export default function Home({ navigation }: Iprops) {
     </TouchableWithoutFeedback>
   )
 }
+
+export default Home

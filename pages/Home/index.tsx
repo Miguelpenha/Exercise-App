@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Inavigation } from '../../types'
+import { useNavigation } from '@react-navigation/native'
 import ContainerPd from '../../components/ContainerPd'
 import { Header, ContainerSettings, Settings, ContainerMessage, NameUser, Message, Options } from './style'
 import Option from './Option'
@@ -16,12 +15,12 @@ type IveriGeral = {
 }
 
 interface Iprops {
-  navigation: NativeStackScreenProps<Inavigation, 'Home'>['navigation']
   veriGeral: IveriGeral
   name: string
 }
 
-export default function Home({ navigation, name, veriGeral }: Iprops) {
+export default function Home({ name, veriGeral }: Iprops) {
+  const navigation = useNavigation()
   const [hour, setHour] = useState(DateTime.now().hour)
   
   useEffect(() => {

@@ -1,8 +1,7 @@
+import { NavigationProp } from '@react-navigation/native'
 import { Ioption } from './type'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Inavigation } from '../../types'
 
-function options(navigation: NativeStackScreenProps<Inavigation, 'Home'>['navigation']): Ioption[] {
+function options(navigation: NavigationProp<ReactNavigation.RootParamList, keyof ReactNavigation.RootParamList>): Ioption[] {
   return [
     {
       title: 'Treinos',

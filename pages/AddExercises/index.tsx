@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Inavigation, Itreino } from '../../types'
+import { useNavigation } from '@react-navigation/native'
+import { Itreino } from '../../types'
 import { useTheme } from 'styled-components'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native'
@@ -13,15 +13,11 @@ import { MaterialIcons } from '@expo/vector-icons'
 import submit from './submit'
 import { Modalize } from 'react-native-modalize'
 import { RFPercentage } from 'react-native-responsive-fontsize'
-import { ScrollView } from 'react-native'
 
-interface Iprops {
-  navigation: NativeStackScreenProps<Inavigation, 'AddExercises'>['navigation']
-}
-
-export default function AddExercises({ navigation }: Iprops) {
+function AddExercises() {
   const [treinos, setTreinos] = useState<Itreino[]>([])
   const theme = useTheme()
+  const navigation = useNavigation()
   const [name, setName] = useState('')
   const [séries, setSéries] = useState('')
   const [quantity, setQuantity] = useState('')
@@ -138,3 +134,5 @@ export default function AddExercises({ navigation }: Iprops) {
     return null
   }
 }
+
+export default AddExercises

@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Inavigation } from '../../types'
+import { useNavigation } from '@react-navigation/native'
 import ContainerPd from '../../components/ContainerPd'
 import HeaderBack from '../../components/HeaderBack'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -19,13 +18,13 @@ type IveriGeral = {
 }
 
 interface Iprops {
-    navigation: NativeStackScreenProps<Inavigation, 'Settings'>['navigation']
     theme: 'light' | 'dark' | null | undefined
     setTheme: IsetTheme
     veriGeral: IveriGeral
 }
 
-const Settings: FC<Iprops> = ({ navigation, theme, setTheme, veriGeral }) => {
+const Settings: FC<Iprops> = ({ theme, setTheme, veriGeral }) => {
+    const navigation = useNavigation()
     const [dark, setDark] = useState(theme==='light' ? false : true)
     const [checkUpdating, setCheckUpdating] = useState(false)
 

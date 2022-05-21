@@ -19,16 +19,17 @@ export const ContainerSéries = styled.View`
 `
 
 export const TitleSéries = styled.Text`
-    width: 45%;
-    padding: 4%;
+    width: 50%;
+    padding: 1%;
+    padding-top: 2%;
     font-weight: bold;
     margin-bottom: 12%;
     align-self: center;
     text-align: center;
-    font-size: ${RFPercentage(3.5)}px;
+    font-size: ${RFPercentage(4)}px;
     border-radius: ${RFPercentage(4)}px;
-    color: ${props => props.theme.color};
-    background-color: ${props => props.theme.primary};
+    color: ${props => props.theme.primary};
+    border: ${RFPercentage(0.4)}px solid ${props => props.theme.primary};
 `
 
 export const ContainerOptions = styled.View`

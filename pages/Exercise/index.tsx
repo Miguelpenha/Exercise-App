@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React, { useEffect, useState } from 'react'
+import { useRoute, useNavigation } from '@react-navigation/native'
 import { Inavigation } from '../../types'
 import ContainerPd from '../../components/ContainerPd'
 import HeaderBack from '../../components/HeaderBack'
@@ -20,13 +20,10 @@ import {
     IconContinueButton
 } from './style'
 
-interface Iprops {
-    navigation: NativeStackScreenProps<Inavigation, 'Exercise'>['navigation']
-    route: NativeStackScreenProps<Inavigation, 'Exercise'>['route']
-}
-
-const Exercise: FC<Iprops> = ({ route, navigation }) => {
-    const { exercise } = route.params
+function Exercise () {
+    const route = useRoute()
+    const navigation = useNavigation()
+    const { exercise } = route.params as Inavigation['Exercise']
     const [séries, setSéries] = useState(exercise.séries)
     const [finished, setFinished] = useState(false)
 
