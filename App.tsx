@@ -1,88 +1,31 @@
-import 'react-native-gesture-handler'
-import React, { useEffect, useState } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import React, { useState } from 'react'
 import { Appearance } from 'react-native'
+import { Itreino, Inavigation } from './types'
 import { createStackNavigator } from '@react-navigation/stack'
-import { Inavigation } from './types'
+import effectsGeral from './utils/effectsGeral'
+import AppLoading from 'expo-app-loading'
 import { ThemeProvider } from 'styled-components'
 import { dark, light } from './theme'
-import treinosVeri from './utils/treinosVeri'
 import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer } from '@react-navigation/native'
 import Login from './pages/Login'
 import Home from './pages/Home'
+import veriGeral from './utils/veriGeral'
 import Settings from './pages/Settings'
 import Exercises from './pages/Exercises'
 import AddExercises from './pages/AddExercises'
 import Exercise from './pages/Exercise'
 import EditExercises from './pages/EditExercises'
-import AppLoading from 'expo-app-loading'
-import updateApp from './utils/updateApp'
+import 'react-native-gesture-handler'
 
 function App() {
   const [pronto, setPronto] = useState(false)
   const [theme, setTheme] = useState<'light' | 'dark' | null | undefined>(Appearance.getColorScheme())
-  const [name, setName] = useState(null)
-  const [treinos, setTreinos] = useState([])
+  const [name, setName] = useState<string>(null)
+  const [treinos, setTreinos] = useState<Itreino[]>([])
   const { Navigator, Screen } = createStackNavigator<Inavigation>()
-  
-  async function themeVeri() {
-    try {
-      if (await AsyncStorage.getItem('theme') === null) {
-        if (Appearance.getColorScheme() === 'light') {
-          await AsyncStorage.setItem('theme', 'light')
-          setTheme('light')
-        } else {
-          await AsyncStorage.setItem('theme', 'dark')
-          setTheme('dark')
-        }
-      } else {
-        if (await AsyncStorage.getItem('theme') === 'light') {
-          setTheme('light')
-        } else {
-          setTheme('dark')
-        }
-      }
-    } catch {
 
-    }
-  }
-
-  async function nameVeri() {
-    const nameOrigin = await AsyncStorage.getItem('name')
-
-    if (nameOrigin) {
-      setName(nameOrigin)
-    } else {
-      setName(null)
-    }
-  }
-
-  async function veriGeral() {
-    updateApp().then(async () => {
-      await themeVeri()
-      await nameVeri()
-      await treinosVeri(treinos, setTreinos)
-      
-      setPronto(true)
-    })
-  }
-
-  useEffect(() => {
-    veriGeral().then()
-  }, [])
-
-  useEffect(() => {
-    themeVeri().then()
-  }, [theme])
-
-  useEffect(() => {
-    nameVeri().then()
-  }, [name])
-
-  useEffect(() => {
-    treinosVeri(treinos, setTreinos).then()
-  }, [treinos])
+  effectsGeral(theme, setTheme, name, setName, treinos, setTreinos, setPronto)
   
   if (!pronto) {
     return <AppLoading/>
@@ -119,14 +62,24 @@ function App() {
           }} initialRouteName={name ? 'Home' : 'Login'}>
             <Screen name="Login" component={Login}/>
             <Screen name="Home">
-              {props => <Home {...props} name={name} veriGeral={veriGeral}/>}
+              {props => 
+                <Home
+                  {...props}
+                  name={name}
+                  veriGeral={async () => (
+                    await veriGeral(setTheme, setName, treinos, setTreinos, setPronto)
+                  )}
+                />
+              }
             </Screen>
             <Screen name="Settings">
               {props => <Settings
                 {...props}
                 theme={theme}
                 setTheme={theme => setTheme(theme)}
-                veriGeral={veriGeral}
+                veriGeral={async () => (
+                  await veriGeral(setTheme, setName, treinos, setTreinos, setPronto)
+                )}
               />}
             </Screen>
             <Screen name="Exercises" component={Exercises}/>
