@@ -1,36 +1,32 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { useState, useEffect, FC, Dispatch, SetStateAction } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import ContainerPd from '../../components/ContainerPd'
 import HeaderBack from '../../components/HeaderBack'
-import verificationTheme from './verificationTheme'
 import removeData from './removeData'
 import { dark as darkTheme, light as lightTheme } from '../../theme'
 import { ScrollView } from 'react-native'
 import { ContainerSwitch, TextSwitch, Switch, Button, IconButton, IconUpdateButton, TextButton, Version } from './style'
 import Constants from 'expo-constants'
 import checkUpdate from './checkUpdate'
-
-type IsetTheme = {
-    (theme: Iprops['theme']): void
-}
-
-type IveriGeral = {
-    (): Promise<void>
-}
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface Iprops {
-    theme: 'light' | 'dark' | null | undefined
-    setTheme: IsetTheme
-    veriGeral: IveriGeral
+    setTheme: Dispatch<SetStateAction<'light' | 'dark'>>
+    theme: 'light' | 'dark'
 }
 
-const Settings: FC<Iprops> = ({ theme, setTheme, veriGeral }) => {
+const Settings: FC<Iprops> = ({ setTheme, theme }) => {
     const navigation = useNavigation()
     const [dark, setDark] = useState(theme==='light' ? false : true)
     const [checkUpdating, setCheckUpdating] = useState(false)
 
     useEffect(() => {
-        verificationTheme(dark, theme, setTheme).then()
+        async function changeTheme() {
+            setTheme(dark ? 'dark' : 'light')
+            await AsyncStorage.setItem('@exercise-app:theme', dark ? 'dark' : 'light')
+        }
+        
+        changeTheme().then()
     }, [dark])
     
     return (
@@ -41,7 +37,7 @@ const Settings: FC<Iprops> = ({ theme, setTheme, veriGeral }) => {
                     <TextSwitch>Tema escuro</TextSwitch>
                     <Switch trackColor={{false: darkTheme.secondary, true: lightTheme.secondary}} thumbColor={dark ? darkTheme.secondary : lightTheme.secondary} value={dark} onChange={() => dark ? setDark(false) : setDark(true)}/>
                 </ContainerSwitch>
-                <Button onPress={async () => await removeData(veriGeral, navigation)}>
+                <Button onPress={async () => await removeData(navigation)}>
                     <IconButton name="delete" size={32}/>
                     <TextButton>Apagar dados</TextButton>
                 </Button>

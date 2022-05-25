@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Appearance } from 'react-native'
-import { Itreino, Inavigation } from './types'
+import { Inavigation } from './types'
 import { createStackNavigator } from '@react-navigation/stack'
 import effectsGeral from './utils/effectsGeral'
 import AppLoading from 'expo-app-loading'
@@ -16,16 +16,22 @@ import Exercises from './pages/Exercises'
 import AddExercises from './pages/AddExercises'
 import Exercise from './pages/Exercise'
 import EditExercises from './pages/EditExercises'
+import { getThemeFunction } from './utils/getTheme'
 import 'react-native-gesture-handler'
+
+type IthemeType = 'light' | 'dark'
 
 function App() {
   const [pronto, setPronto] = useState(false)
-  const [theme, setTheme] = useState<'light' | 'dark' | null | undefined>(Appearance.getColorScheme())
+  const [theme, setTheme] = useState<IthemeType>(null)
   const [name, setName] = useState<string>(null)
-  const [treinos, setTreinos] = useState<Itreino[]>([])
   const { Navigator, Screen } = createStackNavigator<Inavigation>()
 
-  effectsGeral(theme, setTheme, name, setName, treinos, setTreinos, setPronto)
+  effectsGeral(name, setName, setPronto)
+  
+  useEffect(() => {
+    getThemeFunction(setTheme).then()
+  }, [theme])
   
   if (!pronto) {
     return <AppLoading/>
@@ -67,20 +73,19 @@ function App() {
                   {...props}
                   name={name}
                   veriGeral={async () => (
-                    await veriGeral(setTheme, setName, treinos, setTreinos, setPronto)
+                    await veriGeral(setName, setPronto)
                   )}
                 />
               }
             </Screen>
             <Screen name="Settings">
-              {props => <Settings
-                {...props}
-                theme={theme}
-                setTheme={theme => setTheme(theme)}
-                veriGeral={async () => (
-                  await veriGeral(setTheme, setName, treinos, setTreinos, setPronto)
-                )}
-              />}
+              {props => 
+                <Settings
+                  {...props}
+                  setTheme={setTheme}
+                  theme={theme}
+                />
+              }
             </Screen>
             <Screen name="Exercises" component={Exercises}/>
             <Screen name="AddExercises" component={AddExercises}/>
