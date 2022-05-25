@@ -26,7 +26,7 @@ export const Info = styled.Text`
 
 export const Button = styled.TouchableOpacity`
     width: 42%;
-    padding: 2.5%;
+    padding: 1.8%;
     margin-top: 10%;
     align-self: center;
     flex-direction: row;

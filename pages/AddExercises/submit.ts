@@ -7,15 +7,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 async function submit(navigation: NavigationProp<ReactNavigation.RootParamList, keyof ReactNavigation.RootParamList>, treinos: Itreino[], name: string, séries: number, quantity: number, icon: keyof typeof MaterialIcons.glyphMap) {
     if (name && séries && icon && quantity) {
         if (name.length >= 3 && name.length <= 25 && String(séries).length >= 1 && String(séries).length <= 4 && String(quantity).length >= 1 && String(quantity).length <= 4) {
-            treinos.push({
+            const treino = {
                 id: String(uuid.v4()),
                 name,
                 séries,
                 icon,
                 quantity
-            })
+            }
+            
+            treinos.push(treino)
 
-            await AsyncStorage.setItem('treinos', JSON.stringify(treinos))
+            await AsyncStorage.setItem('@exercise-app:treinos', JSON.stringify(treinos))
 
             navigation.navigate('Exercises', {
                 reload: true

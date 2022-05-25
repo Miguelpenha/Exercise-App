@@ -9,6 +9,7 @@ import options from './options'
 import 'intl'
 import 'intl/locale-data/jsonp/pt-BR'
 import { DateTime, HourNumbers } from 'luxon'
+import verificationHour from './verificationHour'
 
 type IveriGeral = {
   (): Promise<void>
@@ -28,16 +29,6 @@ export default function Home({ name, veriGeral }: Iprops) {
     veriGeral().then()
   })
 
-  function veriHour(hour: HourNumbers) {
-    if (hour >= 5 && hour < 12) {
-      return 'Bom dia'
-    } else if (hour >= 12 && hour < 18) {
-      return 'Boa tarde'
-    } else {
-      return 'Boa noite'
-    }
-  }
-
   return (
     <>
       {name ? (
@@ -49,7 +40,7 @@ export default function Home({ name, veriGeral }: Iprops) {
           </Header>
           <ContainerMessage>
             <NameUser>Olá, {name.split(' ')[0].trim()+' '}&#x1F44B;</NameUser>
-            <Message>{veriHour(hour)+' '}&#x1F604;</Message>
+            <Message>{verificationHour(hour)+' '}&#x1F604;</Message>
           </ContainerMessage>
           <Options
             horizontal
