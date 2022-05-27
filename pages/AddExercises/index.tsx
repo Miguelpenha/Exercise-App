@@ -14,6 +14,7 @@ import { Modalize } from 'react-native-modalize'
 import { RFPercentage } from 'react-native-responsive-fontsize'
 import icons from './icons'
 import getTreinos from '../../utils/getTreinos'
+import Alert from './Alert'
 
 function AddExercises() {
   const [treinos, setTreinos] = useState<Itreino[]>([])
@@ -48,6 +49,7 @@ function AddExercises() {
                 selectionColor={theme.primary}
                 placeholderTextColor={theme.color}
               />
+              {name.length !== 0 && name.length < 3 && <Alert icon="info-outline">Nome muito curto</Alert>}
             </Campo>
             <Campo>
               <Label>Quantidade de exercícios</Label>
@@ -85,7 +87,7 @@ function AddExercises() {
         </KeyboardAvoidingView>
         <Modalize
           ref={modalRef}
-          modalHeight={RFPercentage(85)}
+          modalHeight={RFPercentage(62)}
           modalStyle={{backgroundColor: theme.secondary, alignItems: 'center', justifyContent: 'center', paddingTop: '5%'}}
           childrenStyle={{width: '100%', alignItems: 'center'}}
           flatListProps={{
@@ -94,7 +96,7 @@ function AddExercises() {
             renderItem: ({ item }: ListRenderItemInfo<keyof typeof MaterialIcons.glyphMap>) => (
               <Icon
                 name={item}
-                style={{marginTop: 20, marginBottom: 20, marginRight: 30, marginLeft: 30}}
+                style={{marginTop: 20, marginBottom: 20, marginRight: 40, marginLeft: 40}}
                 onPress={() => {
                   modalRef.current.close()
                   setIcon(item)
